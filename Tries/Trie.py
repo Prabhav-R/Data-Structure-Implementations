@@ -62,6 +62,45 @@ class Trie:
     def delete(self, word):
         self.root.delete(word)
 
+    def startsWith(self, word):
+        currNode = self.root
+        for ch in word:
+            index = ord(ch)-ord('a')
+            if currNode.children[index] == None:
+                return False
+            currNode = currNode.children[index]
+        return True
+
+    def _display(self, node, word):
+        if node.isEndOfWord:
+            print(word)
+        for i in range(26):
+            if node.children[i] != None:
+                self._display(node.children[i], word+chr(i+ord('a')))
+
+    def display(self, word=""):
+        self._display(self.root, "")
+
+    def _get_recommendations(self, node, word):
+        if node.isEndOfWord:
+            print(word)
+
+        for i in range(26):
+            if node.children[i] != None:
+                self._get_recommendations(
+                    node.children[i], word+chr(i+ord('a')))
+
+    def printAutoComplete(self, word):
+        currNode = self.root
+
+        for ch in word:
+            index = ord(ch)-ord('a')
+            if currNode.children[index] == None:
+                print("No such prefix")
+                return
+            currNode = currNode.children[index]
+        self._get_recommendations(currNode, word)
+
 
 def main():
     T = Trie()
@@ -70,7 +109,7 @@ def main():
     # print(T.delete("word"))
     # print(T.search("word"))
 
-    T.insert("Peter")
+    T.insert("peter")
 
     # print(T.search("Peter"))
     # print(T.search("Pete"))
@@ -83,10 +122,27 @@ def main():
     T.insert("pickled")
     T.insert("peppers")
 
-    print(T.search("piper"))
-    print(T.delete("picked"))
-    print(T.search("picked"))
-    print(T.delete("pickled"))
+    # print(T.search("piper"))
+    # print(T.delete("picked"))
+    # print(T.search("picked"))
+    # print(T.delete("pickled"))
+
+    # T.insert('apple')
+    # print(T.search('apple'))
+    # print(T.search('app'))
+    # print(T.startsWith('app'))
+    # print(T.insert('app'))
+    # print(T.search('app'))
+    # print(T.startsWith('app'))
+
+    # T.display()
+
+    # T.printAutoComplete("pic")
+    # T.printAutoComplete("pi")
+    # T.printAutoComplete("pip")
+    # T.printAutoComplete("pe")
+    T.printAutoComplete("ep")
+    T.printAutoComplete("peter")
 
 
 if __name__ == "__main__":
