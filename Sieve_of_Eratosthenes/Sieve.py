@@ -48,13 +48,13 @@ def segemeted_sieve_of_eratosthenes(n):
 
 
 def main():
-    print(sieve_of_eratosthenes(10))
+    print(sieve_of_eratosthenes(7))
     print(sieve_of_eratosthenes(20))
     print(sieve_of_eratosthenes(50))
 
     print('*'*20)
 
-    print(segemeted_sieve_of_eratosthenes(10))
+    print(segemeted_sieve_of_eratosthenes(7))
     print(segemeted_sieve_of_eratosthenes(20))
     print(segemeted_sieve_of_eratosthenes(50))
 
